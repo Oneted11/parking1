@@ -8,7 +8,7 @@ export default class Login  extends Component {
   static navigationOptions = {
     title: 'Smart Parking',
     headerStyle: {
-      backgroundColor: '#273cad',
+      backgroundColor: '#3f51b5',
       height: 85,
     },
     headerTitleStyle: {
