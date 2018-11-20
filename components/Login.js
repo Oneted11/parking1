@@ -14,10 +14,9 @@ export default class Login  extends Component {
     headerTitleStyle: {
       color: 'white'
     },
-    headerTruncatedBackTitle: 'Nah',
   }
   _signInAsync = async () => {
-    console.log(this.props);
+    console.log(this.state);
     await AsyncStorage.setItem('userToken', 'abc');
     this.props.navigation.navigate('Tabs');
   };
@@ -28,12 +27,12 @@ export default class Login  extends Component {
         <Content padder>
           <Form>
             <Item floatingLabel>
-              <Label>Username</Label>
-              <Input />
+              <Label>Email</Label>
+              <Input onChangeText={(text)=>this.setState({email:text})} />
             </Item>
             <Item floatingLabel last>
               <Label>Password</Label>
-              <Input />
+              <Input secureTextEntry={true} onChangeText={(text)=>this.setState({Password:text})}/>
             </Item>
             <Button block onPress={this._signInAsync}>
             <Text>SIGN IN</Text>

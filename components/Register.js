@@ -5,13 +5,18 @@ export default class Register  extends Component {
     title: 'Smart Parking',
     headerStyle: {
       backgroundColor: '#273cad',
-      height: 85,
+      height: 65,
     },
     headerTitleStyle: {
       color: 'white'
     },
-    headerTruncatedBackTitle: 'Nah',
   }
+
+  _submit = () => {
+    console.log(this.state);
+    this.props.navigation.navigate('Login')
+  }
+  
   render() {
     return (
       <Container>
@@ -19,28 +24,29 @@ export default class Register  extends Component {
           <Form>
             <Item floatingLabel>
               <Label>Email</Label>
-              <Input />
+              <Input onChangeText={text=>this.setState({email:text})}/>
             </Item>
-            <Item floatingLabel last>
+            <Item floatingLabel >
               <Label>Password</Label>
-              <Input />
+              <Input secureTextEntry={true} onChangeText={text=>this.setState({password:text})}/>
             </Item>
-            <Item floatingLabel last>
+            <Item floatingLabel >
               <Label>Full Name</Label>
-              <Input />
+              <Input onChangeText={text=>this.setState({name:text})}/>
             </Item>
-            <Item floatingLabel last>
+            <Item floatingLabel >
               <Label>City</Label>
-              <Input />
+              <Input onChangeText={text=>this.setState({city:text})}/>
             </Item>
-            <Item floatingLabel last>
+            <Item floatingLabel>
               <Label>Mobile Number</Label>
-              <Input />
+              <Input  onChangeText={text=>this.setState({PhoneNumber:text})}/>
             </Item>
-            <Button block>
+            
+          </Form>
+          <Button block onPress={this._submit} >
             <Text>REGISTER</Text>
           </Button>
-          </Form>
         </Content>
       </Container>
     );
