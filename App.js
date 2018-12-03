@@ -1,6 +1,6 @@
 
-import React, { Component } from 'react';
-import { Header, Body, Container, Title, Text } from 'native-base';
+import React, { Component } from 'react'
+import { Header, Body, Container, Title, Text,Root } from 'native-base';
 import Login from './components/Login'
 import Register from './components/Register'
 import AuthLoadingScreen from './components/AuthLoadingScreen'
@@ -40,9 +40,11 @@ import TheNavigator from './components/TheNavigator'
 export default class App extends Component {
   render() {
     return (
+      <Root>
       <Container>
         <TheNavigator/>
       </Container>
+      </Root>
     );
   }
 }

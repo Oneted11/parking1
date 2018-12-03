@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Form, Item, Input, Label,Button,Text } from 'native-base';
-import {AsyncStorage} from 'react-native'
+import { Container, Header, Content, Form, Item, Input, Label, Button, Text, Toast } from 'native-base';
+import { AsyncStorage } from 'react-native'
 import BasicHeader from './BasicHeader'
+
 // #3f51b5
 // #273cad
-export default class Login  extends Component {
+
+export default class Login extends Component {
   static navigationOptions = {
     title: 'Smart Parking',
     headerStyle: {
@@ -15,10 +17,32 @@ export default class Login  extends Component {
       color: 'white'
     },
   }
+  _retrieveData = async (key) => {
+    try {
+      const value = await AsyncStorage.getItem(key);
+      if (value !== null) {
+        // We have data!!
+        const Jval=JSON.parse(value)
+        console.log('value',value);
+        console.log('Jval',Jval.password)
+        return Jval;
+        
+      }
+     } catch (error) {
+       // Error retrieving data
+       console.log(error)
+     }
+     
+  }
+  
   _signInAsync = async () => {
-    console.log(this.state);
-    await AsyncStorage.setItem('userToken', 'abc');
+    // const password=this._retrieveData(password);
+    // console.log(password);
+    // const user=this._retrieveData(this.state.email)
+    // console.log('user',user)
+    await AsyncStorage.setItem('userToken',"abs")
     this.props.navigation.navigate('Tabs');
+      
   };
 
   render() {
@@ -28,17 +52,17 @@ export default class Login  extends Component {
           <Form>
             <Item floatingLabel>
               <Label>Email</Label>
-              <Input onChangeText={(text)=>this.setState({email:text})} />
+              <Input onChangeText={(text) => this.setState({ email: text })} />
             </Item>
             <Item floatingLabel last>
               <Label>Password</Label>
-              <Input secureTextEntry={true} onChangeText={(text)=>this.setState({Password:text})}/>
+              <Input secureTextEntry={true} onChangeText={(text) => this.setState({ Password: text })} />
             </Item>
             <Button block onPress={this._signInAsync}>
-            <Text>SIGN IN</Text>
-          </Button>
+              <Text>SIGN IN</Text>
+            </Button>
           </Form>
-          <Button transparent onPress={()=> this.props.navigation.navigate('Register')}><Text>Register here</Text></Button>
+          <Button transparent onPress={() => this.props.navigation.navigate('Register')}><Text>Register here</Text></Button>
         </Content>
       </Container>
     );

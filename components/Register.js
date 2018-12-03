@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Form, Item, Input, Label,Button,Text } from 'native-base';
+import {AsyncStorage} from 'react-native'
+import { Container, Header, Content, Form, Item, Input, Label,Button,Text ,Toast} from 'native-base';
 export default class Register  extends Component {
   static navigationOptions = {
     title: 'Smart Parking',
@@ -12,9 +13,23 @@ export default class Register  extends Component {
     },
   }
 
-  _submit = () => {
-    console.log(this.state);
-    this.props.navigation.navigate('Login')
+  _submit = async () => {
+    console.log(this.state.email);
+    const Sstate={
+      'email':this.state.email,
+      'name':this.state.name,
+      'password':this.state.password,
+      'number':this.state.PhoneNumber
+    }
+    try{
+    await AsyncStorage.setItem(this.state.email,JSON.stringify(Sstate));
+    await AsyncStorage.setItem('password',this.state.password)
+  }catch(error){
+    console.log(error.message);
+  }
+  this.setState({})
+   Toast.show({text:'sucess',type:'success'}) 
+    // setTimeout(this.props.navigation.navigate('Login'),1000)
   }
   
   render() {
@@ -47,6 +62,7 @@ export default class Register  extends Component {
           <Button block onPress={this._submit} >
             <Text>REGISTER</Text>
           </Button>
+          <Button transparent onPress={() => this.props.navigation.navigate('Login')}><Text>Back to Login</Text></Button>
         </Content>
       </Container>
     );
