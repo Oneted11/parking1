@@ -6,9 +6,9 @@ import NumericInput from 'react-native-numeric-input';
 export default class Occupation extends Component {
   constructor() {
     super();
-    state = {
-      selected2:undefined,
-      amountowed:'',
+    this.state = {
+      selected2: undefined,
+      amountowed: 0,
     }
   }
 
@@ -18,11 +18,9 @@ export default class Occupation extends Component {
     if (hours !== undefined) {
       const returnAmt = hours * 50
       console.log('return mount is ', returnAmt)
-      this.setState({amountowed:returnAmt})
-      return null;
+      this.setState({ amountowed: returnAmt })
     } else {
       console.log('selected2 is null')
-      return null;
     }
   }
 
@@ -38,12 +36,9 @@ export default class Occupation extends Component {
       <Container>
         <Header />
         <Content padder>
-
+          <Label>Amount owed </Label>
+          <Text>{this.state.amountowed}</Text>
           <Form>
-            <Item>
-              <Text>{this.state.amountowed}</Text> 
-            </Item>
-
             <Item floatingLabel>
               <Label>Car Plate Number</Label>
               <Input onChangeText={(text) => this.setState({ PlateNo: text })} />
@@ -55,7 +50,7 @@ export default class Occupation extends Component {
             <Label> </Label>
             <Item>
               <Label>Expected time of stay</Label>
-              <NumericInput value= {this.state.selected2} type='up-down' onChange={this.onValueChange2.bind(this)}/>
+              <NumericInput value={this.state.selected2} type='up-down' onChange={this.onValueChange2.bind(this)} />
             </Item>
             <Label> </Label>
             <Button block onPress={this._calculateAmt.bind(this)}>

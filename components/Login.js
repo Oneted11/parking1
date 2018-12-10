@@ -17,29 +17,9 @@ export default class Login extends Component {
       color: 'white'
     },
   }
-  _retrieveData = async (key) => {
-    try {
-      const value = await AsyncStorage.getItem(key);
-      if (value !== null) {
-        // We have data!!
-        const Jval=JSON.parse(value)
-        console.log('value',value);
-        console.log('Jval',Jval.password)
-        return Jval;
-        
-      }
-     } catch (error) {
-       // Error retrieving data
-       console.log(error)
-     }
-     
-  }
+  
   
   _signInAsync = async () => {
-    // const password=this._retrieveData(password);
-    // console.log(password);
-    // const user=this._retrieveData(this.state.email)
-    // console.log('user',user)
     await AsyncStorage.setItem('userToken',"abs")
     this.props.navigation.navigate('Tabs');
       
