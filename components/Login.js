@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Text, Toast } from 'native-base';
 import { AsyncStorage } from 'react-native'
-import BasicHeader from './BasicHeader'
+import {auth,db} from './firebase'
 
 // #3f51b5
-// #273cad
-
+// "module:metro-react-native-babel-preset",
 export default class Login extends Component {
   static navigationOptions = {
     title: 'Smart Parking',
@@ -16,13 +15,20 @@ export default class Login extends Component {
     headerTitleStyle: {
       color: 'white'
     },
+  };
+
+  constructor() {
+    super();
+    this.state = {
+      email:'',
+      password:'',
+    }
   }
-  
-  
+
   _signInAsync = async () => {
-    await AsyncStorage.setItem('userToken',"abs")
+    await AsyncStorage.setItem('userToken', "abs")
     this.props.navigation.navigate('Tabs');
-      
+
   };
 
   render() {
