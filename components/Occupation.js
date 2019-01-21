@@ -14,6 +14,7 @@ export default class Occupation extends Component {
 
   _calculateAmt() {
     const hours = this.state.selected2
+    console.log('selected is', hours)
     const returnAmt = 0
     if (hours !== undefined) {
       const returnAmt = hours * 50
@@ -26,6 +27,7 @@ export default class Occupation extends Component {
 
 
   onValueChange2(value) {
+    // console.log('the value is', value)
     this.setState({
       selected2: value
     });
@@ -36,8 +38,8 @@ export default class Occupation extends Component {
       <Container>
         <Header />
         <Content padder>
-          <Label>Amount owed </Label>
-          <Text>{this.state.amountowed}</Text>
+          <Label style={{textAlign:'center'}}>Amount owed </Label>
+          <Text style={{textAlign:'center',fontSize:25,color:'#32cd32'}} >Ksh {this.state.amountowed}</Text>
           <Form>
             <Item floatingLabel>
               <Label>Car Plate Number</Label>
@@ -49,9 +51,13 @@ export default class Occupation extends Component {
             </Item>
             <Label> </Label>
             <Item>
+              <Label floatingLabel>Expected time of stay</Label>
+              <Input keyboardType='numeric' onChangeText={this.onValueChange2.bind(this)} />
+            </Item>
+            {/* <Item>
               <Label>Expected time of stay</Label>
               <NumericInput value={this.state.selected2} type='up-down' onChange={this.onValueChange2.bind(this)} />
-            </Item>
+            </Item> */}
             <Label> </Label>
             <Button block onPress={this._calculateAmt.bind(this)}>
               <Text>Calculate</Text>

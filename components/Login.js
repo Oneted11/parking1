@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Form, Item, Input, Label, Button, Text, Toast } from 'native-base';
 import { AsyncStorage } from 'react-native'
-import {auth,db} from './firebase'
+import firebase,{auth,db} from './firebase'
 
 // #3f51b5
 // "module:metro-react-native-babel-preset",
@@ -26,6 +26,15 @@ export default class Login extends Component {
   }
 
   _signInAsync = async () => {
+    let email=this.state.email;
+    let password=this.state.password;
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log('login error is = ',error.code);
+      // ...
+    });
     await AsyncStorage.setItem('userToken', "abs")
     this.props.navigation.navigate('Tabs');
 
